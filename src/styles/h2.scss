@@ -1,0 +1,13 @@
+h2 {
+	margin-top: 0.5em;
+	text-shadow: 1px 1px 3px rgba(0,0,0,1);
+
+	small {
+		font-size: 0.6em;
+	}
+}
+
+.black-on-white h2 {
+	text-shadow: 1px 1px 3px rgba(255,255,255,1);
+	padding: 0;
+}

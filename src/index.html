@@ -1,0 +1,85 @@
+ <!doctype html>
+<html lang='en-GB'>
+<head>
+	<meta charset='utf-8'>
+
+	<title>The reactive programming revolution</title>
+
+	<!-- CSS -->
+	<link rel='stylesheet' href='min.css'>
+	<link rel='ractive' href='assets/components/elf.html'>
+</head>
+
+<body>
+	<header></header>
+
+	<main>
+		<%= slides %>
+	</main>
+
+	<footer>
+
+	</footer>
+
+
+	<script src='http://code.jquery.com/jquery-1.11.0.min.js'></script>
+	<script src='assets/js/Ractive.js'></script>
+	<script src='assets/js/Ractive.load.js'></script>
+	<script src='assets/js/Ractive-events-hover.js'></script>
+	<script src='assets/js/Ractive-transitions-fade.js'></script>
+	<script src='assets/js/Ractive-transitions-slide.js'></script>
+	<script src='assets/js/xmlAdaptor.js'></script>
+
+	<script src='assets/js/codemirror/codemirror.js'></script>
+	<script src='assets/js/codemirror/css.js'></script>
+	<script src='assets/js/codemirror/htmlmixed.js'></script>
+	<script src='assets/js/codemirror/javascript.js'></script>
+	<script src='assets/js/codemirror/xml.js'></script>
+
+	<script src='assets/js/stations.js'></script>
+	<script src='assets/js/cities.js'></script>
+
+	<script>
+		var bart, helloWorld, parser, chart;
+
+		Ractive.load( 'assets/components/bart.html' ).then( function ( Bart ) {
+			bart = new Bart({
+				el: 'bart',
+				data: {
+					stations: stations,
+					selected: 'embr',
+					apiKey: 'R5LY-BIE5-Y8UY-44IW'
+				}
+			});
+		});
+
+		Ractive.load( 'assets/components/hello-world.html' ).then( function ( HelloWorld ) {
+			helloWorld = new HelloWorld({
+				el: 'hello-world'
+			});
+		});
+
+		Ractive.load( 'assets/components/parser.html' ).then( function ( Parser ) {
+			console.log( Parser );
+			parser = new Parser({
+				el: 'parser'
+			});
+		}, function ( err ) {
+			console.error( err.message || err );
+		});
+
+		Ractive.load( 'assets/components/temperature-chart.html' ).then( function ( TemperatureChart ) {
+			chart = new TemperatureChart({
+				el: 'chart'
+			});
+
+			chart.set({
+				cities: cities,
+				selectedCity: cities[1]
+			});
+		});
+
+		Ractive.load();
+	</script>
+</body>
+</html>

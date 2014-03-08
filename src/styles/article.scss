@@ -1,0 +1,23 @@
+article {
+	position: relative;
+	width: 100vw;
+	height: 100vh;
+	padding: 2em 1em;
+	box-sizing: border-box;
+	background: #666 no-repeat 50% 50%;
+	background-size: cover;
+}
+
+
+.east {
+	background-position: 100% 50%;
+}
+
+.south {
+	background-position: 50% 100%;
+}
+
+.black-on-white {
+	color: #333;
+	background-color: white;
+}

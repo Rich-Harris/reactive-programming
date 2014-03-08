@@ -1,0 +1,64 @@
+<link rel='ractive' href='./codemirror.html'>
+
+<div class='top half'>
+	<!-- CodeMirror editor -->
+	<codemirror value='{{template}}' mode='htmlmixed'/>
+</div>
+
+<!-- Preview -->
+<div class='bottom half'>
+	<div class='parser-result {{# error ? "error" : "" }}'>{{parsed}}</div>
+</div>
+
+
+<style>
+	.top.half {
+		padding: 1em 1em 0.5em 1em;
+	}
+
+	.bottom.half {
+		padding: 0.5em 1em 1em 1em;
+	}
+
+	.parser-result {
+		background-color: rgb(249,252,246);
+		color: #333;
+		padding: 0.4em;
+		font-family: 'Source Code Pro', monospace;
+		font-size: 0.8em;
+		margin: 0 0 4em 0;
+		width: 100%;
+		height: 100%;
+		box-sizing: border-box;
+	}
+</style>
+
+
+<script>
+	component.exports = {
+		init: function () {
+			this.observe( 'template', function ( template ) {
+				var parsed;
+
+				try {
+					parsed = Ractive.parse( template );
+
+					this.set({
+						parsed: JSON.stringify(parsed),
+						error: false
+					});
+				} catch ( err ) {
+					this.set({
+						error: true
+					});
+				}
+			});
+
+			window.parser = this;
+		},
+
+		data: {
+			template: '<p>This is a {{mustache}} template.</p>\n<p>It can include...</p>\n\n<ul>\n  {{#lists}}\n    {{>partials}}\n  {{/lists}}\n</ul>\n\n<p>...and everything else.</p>'
+		}
+	};
+</script>
